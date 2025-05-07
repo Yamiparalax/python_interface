@@ -1,4 +1,4 @@
-# 🎨 Interface PyQt5 para Execução de Scripts Automáticos
+# 🎨 Interface PySide6 para Execução de Scripts Automáticos
 
 Sistema de interface gráfica ⚡ elegante e responsiva, que executa scripts Python com apenas um clique — sem travar a interface, com feedback visual e logs dinâmicos.  
 Ideal para automação de rotinas contábeis, financeiras ou qualquer tarefa repetitiva.
@@ -34,7 +34,7 @@ nomes_scripts = ['script1.py', 'script2.py']  # <<--- edite conforme necessário
 ## ▶️ Como rodar
 
 ```bash
-pip install PyQt5
+pip install PySide6
 python nome_do_seu_arquivo.py
 ```
 
@@ -69,7 +69,7 @@ def minha_funcao():
 
 ## ✨ Tecnologias
 
-* [PyQt5](https://pypi.org/project/PyQt5/) — Interface gráfica moderna
+* [PySide6](https://pypi.org/project/PySide6/) — Interface gráfica moderna
 * **Threading (QThread)** — Execução paralela sem travamento
 * **Sistema de assets** — Carregamento dinâmico de GIFs, ícones e scripts
 
