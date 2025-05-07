@@ -3,12 +3,12 @@ import sys
 import os
 import importlib.util
 import inspect
-from PyQt5.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication, QWidget, QPushButton, QVBoxLayout,
     QHBoxLayout, QTextEdit, QLabel, QGraphicsDropShadowEffect
 )
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer, QSize
-from PyQt5.QtGui import QMovie, QIcon, QColor
+from PySide6.QtCore import Qt, QThread, Signal, QTimer, QSize
+from PySide6.QtGui import QMovie, QIcon, QColor
 
 # ====== DEFINIR CAMINHO DOS ASSETS ======
 ASSETS_PATH = os.path.join(os.path.dirname(__file__), 'assets')
@@ -35,8 +35,8 @@ def carregar_funcoes_scripts(nomes_arquivos):
 # ====== CLASSE: Worker ======
 class Worker(QThread):
     """Thread para executar funções sem travar a interface"""
-    finished = pyqtSignal(str)
-    error = pyqtSignal(str)
+    finished = Signal(str)
+    error = Signal(str)
 
     def __init__(self, nome, func):
         super().__init__()
@@ -223,11 +223,11 @@ class App(QWidget):
         self.log_text = QTextEdit()
         self.log_text.setReadOnly(True)
         self.log_text.setStyleSheet("""
-            background-color: rgba(30, 30, 30, 120); /* Fundo ligeiramente mais claro para melhor contraste */
-            color: #f0f0f0; /* Cor de texto padrão mais clara */
+            background-color: rgba(30, 30, 30, 120);
+            color: #f0f0f0;
             border-radius: 8px;
             font-size: 15px;
-            font-family: 'Segoe UI', monospace; /* Fonte mais moderna e legível */
+            font-family: 'Segoe UI', monospace;
         """)
         sombra = QGraphicsDropShadowEffect()
         sombra.setBlurRadius(15)
@@ -240,16 +240,15 @@ class App(QWidget):
 
 # ====== FUNÇÃO: _gerar_cor_unica ======
     def _gerar_cor_unica(self):
-        return "#{:06x}".format(random.randint(0xAAFFAA, 0xFFFFFF)) # Intervalo para cores mais claras
+        return "#{:06x}".format(random.randint(0xAAFFAA, 0xFFFFFF))
 
     # ====== FUNÇÃO: _log ======
     def _log(self, msg, tipo="info", nome_funcao=None):
-        cores_tipos = {"info": "#b0ffb0", "erro": "#ff8080", "ok": "#80ffff"} # Neons claros
-        cores_arco_iris = {"vermelho": "#ff69b4", "laranja": "#ffb347", "amarelo": "#ffff8f", # Rosa neon, laranja, amarelo claro
-                           "verde": "#98fb98", "azul": "#add8e6", "anil": "#8a2be2",       # Verde claro, azul claro, violeta
-                           "violeta": "#ee82ee"}                                          # Magenta
+        cores_tipos = {"info": "#b0ffb0", "erro": "#ff8080", "ok": "#80ffff"}
+        cores_arco_iris = {"vermelho": "#ff69b4", "laranja": "#ffb347", "amarelo": "#ffff8f",
+                           "verde": "#98fb98", "azul": "#add8e6", "anil": "#8a2be2", "violeta": "#ee82ee"}
         cor = self.cores_funcoes.get(nome_funcao, cores_tipos.get(tipo, cores_arco_iris.get(tipo.lower(), "#b0ffb0")))
-        self.log_text.append(f'<b><span style="color:{cor};">{msg}</span></b>') # Mantendo o negrito
+        self.log_text.append(f'<b><span style="color:{cor};">{msg}</span></b>')
 
     # ====== FUNÇÃO: _add_to_queue ======
     def _add_to_queue(self, nome, func):
@@ -296,4 +295,4 @@ class App(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
