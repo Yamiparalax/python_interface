@@ -78,7 +78,6 @@ def minha_funcao():
 ## 👨‍💻 Autor
 
 Carlos Eduardo Costa Lima da Silva
-**Automação & Reconciliação Contábil — C6 Bank** 🏦
 
 ---
 
